@@ -21,3 +21,13 @@ after_success:
   - docker push gzeromin/test-docker-fullstack-frontend
   - docker push gzeromin/test-docker-fullstack-backend
   - docker push gzeromin/test-docker-fullstack-nginx
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "test-docker-fullstack"
+  env: "Testdockerfullstack-env"
+  bucket_name: elasticbeanstalk-us-east-2-571424513975
+  bucket_path: "test-docker-fullstack"
+  on:
+    branch: main

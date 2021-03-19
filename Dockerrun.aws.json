@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "gzeromin/test-docker-fullstack-frontend",
+      "hostname": "frontend",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "backend",
+      "image": "gzeromin/test-docker-fullstack-backend",
+      "hostname": "backend",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "gzeromin/test-docker-fullstack-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "protMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["frontend", "backend"],
+      "memory": 128
+    }
+  ]
+}
