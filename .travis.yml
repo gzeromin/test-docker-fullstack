@@ -1,0 +1,23 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t gzeromin/test-docker-fullstack -f ./frontend/Dockerfile.dev ./frontend
+
+script:
+  - docker run -e CI=true gzeromin/test-docker-fullstack npm test
+
+after_success:
+  - docker build -t gzeromin/test-docker-fullstack-frontend ./frontend
+  - docker build -t gzeromin/test-docker-fullstack-backend ./backend
+  - docker build -t gzeromin/test-docker-fullstack-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push gzeromin/test-docker-fullstack-frontend
+  - docker push gzeromin/test-docker-fullstack-backend
+  - docker push gzeromin/test-docker-fullstack-nginx
