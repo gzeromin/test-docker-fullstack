@@ -20,10 +20,10 @@
       "image": "gzeromin/test-docker-fullstack-nginx",
       "hostname": "nginx",
       "essential": true,
-      "protMappings": [
+      "portMappings": [
         {
           "hostPort": 80,
-          "containerPort": 80
+          "containerPort":80
         }
       ],
       "links": ["frontend", "backend"],
