@@ -11,16 +11,16 @@ before_install:
 script:
   - docker run -e CI=true gzeromin/test-docker-fullstack npm test
 
-after_success:
-  - docker build -t gzeromin/test-docker-fullstack-frontend ./frontend
-  - docker build -t gzeromin/test-docker-fullstack-backend ./backend
-  - docker build -t gzeromin/test-docker-fullstack-nginx ./nginx
+# after_success:
+#   - docker build -t gzeromin/test-docker-fullstack-frontend ./frontend
+#   - docker build -t gzeromin/test-docker-fullstack-backend ./backend
+#   - docker build -t gzeromin/test-docker-fullstack-nginx ./nginx
 
-  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+#   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push gzeromin/test-docker-fullstack-frontend
-  - docker push gzeromin/test-docker-fullstack-backend
-  - docker push gzeromin/test-docker-fullstack-nginx
+#   - docker push gzeromin/test-docker-fullstack-frontend
+#   - docker push gzeromin/test-docker-fullstack-backend
+#   - docker push gzeromin/test-docker-fullstack-nginx
 
 deploy:
   provider: elasticbeanstalk
