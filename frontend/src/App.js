@@ -4,21 +4,11 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-
-  useEffect(() => {
-    console.log("1");
-    axios.get('/api/hi')
-      .then(response => {
-        console.log('response', response)
-      })
-  }, [])
-
+  
   const [lists, setLists] = useState([]);
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    console.log("2");
-
     axios.get('/api/values').then(response => {
       console.log("response", response);
       setLists(response.data);
@@ -42,9 +32,11 @@ function App() {
     })
   }
 
+
   return (
     <div className="App">
       <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
         <div className="container">
           {
             lists && lists.map((list, index) => (
